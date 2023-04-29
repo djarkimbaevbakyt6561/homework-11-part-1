@@ -1,4 +1,6 @@
-import { createContext,useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
+import { AuthContext } from "./AuthContext";
+import { UsersContext } from "./UsersContext";
 const initialEmailState = {
     email: '',
     emailValid: false,
@@ -43,6 +45,8 @@ export const LoginContext = createContext({
 })
 
 const LoginProvider = (props) => {
+    const authContext = useContext(AuthContext)
+    const userContext = useContext(UsersContext)
     const [emailAndPassword, dispatchEmailAndPassword] = useReducer(emailAndPasswordReducer, initialEmailState)
     const emailChangeHandler = (e) => {
         dispatchEmailAndPassword({ type: EMAIL, value: e.target.value })
@@ -59,12 +63,12 @@ const LoginProvider = (props) => {
     }
     const submitHandler = (e) => {
         e.preventDefault()
-        props.onLogin(emailAndPassword.email, emailAndPassword.password)
+        authContext.loginHandler(emailAndPassword.email, emailAndPassword.password)
         const user = {
             email: emailAndPassword.email,
             password: emailAndPassword.password
         }
-        props.onSubmit(user)
+        userContext.addNewUserHandler(user)
 
     }
     const initStateAndFunc = {

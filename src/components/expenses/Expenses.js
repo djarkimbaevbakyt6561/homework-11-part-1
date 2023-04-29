@@ -9,8 +9,8 @@ export const Expenses = ({ onClick }) => {
     const context = useContext(ExpensesContext)
     return (
         <UnorderedList>
-            <ExpensesFilter onClick2={context.descendingProduct} onClick={context.ascendingProduct} getValue={context.getSelectValue} selected={context.selectedYear} />
-            <ExpenseChart filteredExpenses={context.filteredYear} />
+            <ExpensesFilter/>
+            <ExpenseChart/>
             {context.sortedData.map((el) => (
                 <ExpenseItem id={el.id} key={el.id} el={el} onClick={onClick} />
             ))}

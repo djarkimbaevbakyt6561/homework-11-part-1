@@ -1,21 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-const ExpensesFilter = (props) => {
+import { ExpensesContext } from '../../contexts/ExpensesContext'
+const ExpensesFilter = () => {
+  const context = useContext(ExpensesContext)
     return (
-        <ExpensesFilterDiv>
-            <ExpensesFilterControl>
-                <Button onClick={props.onClick2}>По убыванию</Button>
-                <Button onClick={props.onClick}>По возрастанию</Button>
-                <Label>Фильтр по году</Label>
-                <Select value={props.selected} onChange={props.getValue}>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                    <option value="2020">2020</option>
-                </Select>
-            </ExpensesFilterControl>
-        </ExpensesFilterDiv>
-    )
+    <ExpensesFilterDiv>
+      <ExpensesFilterControl>
+        <Button onClick={context.descendingProduct}>По убыванию</Button>
+        <Button onClick={context.ascendingProduct}>По возрастанию</Button>
+        <Label>Фильтр по году</Label>
+        <Select value={context.selectedYear} onChange={context.getSelectValue}>
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+        </Select>
+      </ExpensesFilterControl>
+    </ExpensesFilterDiv>
+  )
 }
 export default ExpensesFilter
 const ExpensesFilterDiv = styled.div`

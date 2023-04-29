@@ -21,18 +21,18 @@ function App() {
   const usersContext = useContext(UsersContext)
   return (
     <div className="App">
-      <Header userOpen={usersContext.userOpenHandler} userClose={usersContext.userCloseHandler} onLogout={authContext.logOutHandler} isLogin={authContext.isLogin} />
+      <Header/>
       <>
         {authContext.isLogin ? (
           <>
             <>
-              {usersContext.showUsers ? (<Users users={usersContext.usersObject} />) : (
+              {usersContext.showUsers ? (<Users/>) : (
                 <div>
                   <NewExpenseProvider>
-                    <NewExpense onSubmit={productContext.addNewExpensesHandler} />
+                    <NewExpense/>
                   </NewExpenseProvider>
-                  <ExpensesProvider data={productContext.product}>
-                    <Expenses onClick={productContext.deleteExpenses}  />
+                  <ExpensesProvider>
+                    <Expenses/>
                   </ExpensesProvider>
                 </div>
               )}
@@ -40,7 +40,7 @@ function App() {
             </>
           </>
         ) : (
-          <LoginProvider onSubmit={usersContext.addNewUserHandler} onLogin={authContext.loginHandler}>
+          <LoginProvider>
             <Login />
           </LoginProvider>
         )}

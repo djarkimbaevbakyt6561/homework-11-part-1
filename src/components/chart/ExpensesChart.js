@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import ChartBar from './ChartBar'
 import styled from "styled-components";
-const ExpenseChart = (props) => {
+import { ExpensesContext } from "../../contexts/ExpensesContext";
+const ExpenseChart = () => {
+    const context = useContext(ExpensesContext)
+    const { filteredYear } = context
     const month = [
         { label: 'Jan', currentPrice: 0 },
         { label: 'Feb', currentPrice: 0 },
@@ -16,7 +19,7 @@ const ExpenseChart = (props) => {
         { label: 'Nov', currentPrice: 0 },
         { label: 'Dec', currentPrice: 0 },
     ]
-    props.filteredExpenses.forEach(element => {
+    filteredYear.forEach(element => {
         if (element.date instanceof Date) {
             const expenseMonth = element.date.getMonth()
             month[expenseMonth].currentPrice += element.price

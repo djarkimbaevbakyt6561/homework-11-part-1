@@ -1,13 +1,17 @@
-import { createContext,useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { ProductContext } from "./ProductContext";
 
 export const ExpensesContext = createContext({
 
 })
-const ExpensesProvider = ({ data, children }) => {
+const ExpensesProvider = ({ children }) => {
+    const productContext = useContext(ProductContext)
+    const { product } = productContext
+    
     const [selectedYear, setSelectedYear] = useState('2023')
     const [sortState, setSortState] = useState(true)
 
-    const filteredYear = data.filter((el) => {
+    const filteredYear = product.filter((el) => {
         if (el.date instanceof Date) {
             return el.date.getFullYear().toString() === selectedYear;
         } else {

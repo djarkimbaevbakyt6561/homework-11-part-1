@@ -1,11 +1,14 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useContext } from "react";
 import { User } from "./User";
+import { UsersContext } from "../../contexts/UsersContext";
 
-export const Users = (props) => {
+export const Users = () => {
+    const context = useContext(UsersContext)
+    const {usersObject} = context
     return (
         <UnorderedList>
-            {props.users.map((el) => {
+            {usersObject.map((el) => {
                 return <User email={el.email} password={el.password}></User>
             })}
         </UnorderedList>

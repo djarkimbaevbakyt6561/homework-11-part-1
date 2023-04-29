@@ -2,11 +2,13 @@ import { useContext } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { ExpensesFormContext } from '../../contexts/ExpensesFormContext';
+import { ProductContext } from '../../contexts/ProductContext';
 import { Button } from '../UI/Button';
 import { Input } from '../UI/Input';
 
-
-export const ExpensesForm = ({ onClick, onSubmit }) => {
+export const ExpensesForm = () => {
+    const productContext = useContext(ProductContext)
+    const { addNewExpensesHandler,  deleteExpenses}  = productContext
     const context = useContext(ExpensesFormContext)
     const {setInputDate,setInputNumber,setInputText,inputDate,inputNumber,inputText} = context
     function getInputValue(e) {
@@ -30,7 +32,7 @@ export const ExpensesForm = ({ onClick, onSubmit }) => {
             date: convertedDate,
             id: Math.random()
         };
-        onSubmit(product);
+        addNewExpensesHandler(product);
         setInputText('');
         setInputNumber('');
         setInputDate('');
@@ -69,7 +71,7 @@ export const ExpensesForm = ({ onClick, onSubmit }) => {
                 Датировать
             </Input>
             <ButtonCont>
-                <Button marginRight='14px' onClick={onClick}>
+                <Button marginRight='14px' onClick={deleteExpenses}>
                     Отмена
                 </Button>
                 <Button marginRight='35px' onClick={submitHandler} type='submit'>

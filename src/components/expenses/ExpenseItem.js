@@ -1,18 +1,21 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { ProductContext } from '../../contexts/ProductContext';
 import ExpenseDate from './ExpenseDate'
-export const ExpenseItem = ({ el, onClick, id }) => {
-    return (
-        <ListItem>
-            <ExpenseDate date={el.date} />
-            <Info>
-                <TitleP>{el.title}</TitleP>
-                <NumberP>$ {el.price}</NumberP>
-            </Info>
-            <Button onClick={() => {
-                onClick(id)
-            }}>Delete</Button>
-        </ListItem>
-    )
+export const ExpenseItem = ({ el, id }) => {
+  const context = useContext(ProductContext)
+  return (
+    <ListItem>
+      <ExpenseDate date={el.date} />
+      <Info>
+        <TitleP>{el.title}</TitleP>
+        <NumberP>$ {el.price}</NumberP>
+      </Info>
+      <Button onClick={() => {
+        context.deleteExpenses(id)
+      }}>Delete</Button>
+    </ListItem>
+  )
 }
 const ListItem = styled.li`
   display: flex;

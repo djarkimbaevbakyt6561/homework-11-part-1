@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import { useContext } from 'react';
 import { NewExpenseContext } from '../../contexts/NewExpenseContext';
 import ExpensesFormProvider from '../../contexts/ExpensesFormContext';
+import { ProductContext } from '../../contexts/ProductContext';
 
-export const NewExpense = ({ onSubmit }) => {
+export const NewExpense = () => {
     const context = useContext(NewExpenseContext)
     const ButtonContainer = context.containerStyle ? ButtonContainerTwo : ButtonContainerOne;
 
@@ -14,7 +15,7 @@ export const NewExpense = ({ onSubmit }) => {
         <ButtonContainer>
             {context.showForm ? (
                 <ExpensesFormProvider   >
-                    <ExpensesForm onSubmit={onSubmit}  onClick={() => { context.openAndCloseExpensesFormHandler(); context.changeButtonContainer() }} />
+                    <ExpensesForm onClick={() => { context.openAndCloseExpensesFormHandler(); context.changeButtonContainer() }} />
                 </ExpensesFormProvider>
             ) : (
                 <Button onClick={() => { context.openAndCloseExpensesFormHandler(); context.changeButtonContainer() }}>
